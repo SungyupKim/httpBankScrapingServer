@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankbe-server
+spec:
+  selector:
+    matchLabels:
+      purpose: bankbe-server
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        purpose: bankbe-server
+    spec:
+      containers:
+      - name: bankbe-server
+        image: sungyupv/bankbe-server:latest
+        env :
+        - name : DB_HOST
+          valueFrom:
+             secretKeyRef:
+                name: 10.63.193.2
+                key: db_host

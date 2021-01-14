@@ -1,0 +1,18 @@
+# my-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: bankbe-server
+  labels:
+    purpose: bankbe-server
+  annotations:
+    cloud.google.com/backend-config: '{"ports": {"80":"my-backendconfig"}}'
+    cloud.google.com/neg: '{"ingress": true}'
+spec:
+  type: ClusterIP
+  selector:
+    purpose: bankbe-server
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 3000
